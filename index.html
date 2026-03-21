@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en" data-theme="light">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -1421,26 +1421,6 @@
   </div>
 </footer>
 
-<!-- ============ THEME TOGGLE ============ -->
-<div class="theme-toggle" id="themeToggle" role="button" tabindex="0" aria-label="Toggle theme">
-  <span class="toggle-icon" id="moonIcon">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
-    </svg>
-  </span>
-  <button class="toggle-track" id="toggleTrack" tabindex="-1">
-    <span class="toggle-thumb"></span>
-  </button>
-  <span class="toggle-icon" id="sunIcon">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-      <circle cx="12" cy="12" r="5"/>
-      <line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/>
-      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
-      <line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/>
-      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
-    </svg>
-  </span>
-</div>
 
 <script>
   // ---- NAV SCROLL ----
@@ -1509,25 +1489,6 @@
 
   // ---- THEME TOGGLE ----
   const html        = document.documentElement;
-  const toggleTrack = document.getElementById('toggleTrack');
-  const moonIcon    = document.getElementById('moonIcon');
-  const sunIcon     = document.getElementById('sunIcon');
-  const themeToggle = document.getElementById('themeToggle');
-
-  setTheme(localStorage.getItem('topstar-theme') || 'dark');
-
-  function setTheme(theme) {
-    html.setAttribute('data-theme', theme);
-    localStorage.setItem('topstar-theme', theme);
-    const isLight = theme === 'light';
-    toggleTrack.classList.toggle('active', isLight);
-    moonIcon.classList.toggle('active', !isLight);
-    sunIcon.classList.toggle('active', isLight);
-  }
-
-  const handleToggle = () => setTheme(html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
-  themeToggle.addEventListener('click', handleToggle);
-  themeToggle.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); handleToggle(); } });
 
   // ---- CONTACT FORM ----
   function handleFormSubmit(e) {
