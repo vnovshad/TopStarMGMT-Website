@@ -1373,6 +1373,8 @@
     </h2>
     <div class="contact-card reveal reveal-delay-1">
       <form id="contactForm" onsubmit="handleFormSubmit(event)">
+        <input type="hidden" name="access_key" value="7145375e-b7bc-4b26-95a0-151286433c14">
+        <input type="hidden" name="subject" value="New Creator Application — TopStar MGMT">
         <div class="cf-grid-2">
           <div class="cf-field">
             <label for="cf-fname">First Name</label>
@@ -1506,19 +1508,47 @@
   // ---- CONTACT FORM ----
   function handleFormSubmit(e) {
     e.preventDefault();
-    const btn = e.target.querySelector('.btn-submit');
+    const form = e.target;
+    const btn = form.querySelector('.btn-submit');
     btn.textContent = 'Sending…';
     btn.disabled = true;
-    setTimeout(() => {
-      btn.textContent = '✓ Message Sent!';
-      btn.style.background = '#1a9e5c';
-      e.target.reset();
+
+    const data = new FormData(form);
+
+    fetch('https://api.web3forms.com/submit', {
+      method: 'POST',
+      body: data
+    })
+    .then(res => res.json())
+    .then(res => {
+      if (res.success) {
+        btn.textContent = '✓ Message Sent!';
+        btn.style.background = '#1a9e5c';
+        form.reset();
+        setTimeout(() => {
+          btn.textContent = 'Start Your Journey';
+          btn.style.background = '';
+          btn.disabled = false;
+        }, 3500);
+      } else {
+        btn.textContent = 'Failed — Try Again';
+        btn.style.background = '#e53e3e';
+        btn.disabled = false;
+        setTimeout(() => {
+          btn.textContent = 'Start Your Journey';
+          btn.style.background = '';
+        }, 3500);
+      }
+    })
+    .catch(() => {
+      btn.textContent = 'Failed — Try Again';
+      btn.style.background = '#e53e3e';
+      btn.disabled = false;
       setTimeout(() => {
         btn.textContent = 'Start Your Journey';
         btn.style.background = '';
-        btn.disabled = false;
       }, 3500);
-    }, 1200);
+    });
   }
 </script>
 </body>
