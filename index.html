@@ -6,7 +6,7 @@
   <title>TopStar MGMT — Elite Creator Management</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=Great+Vibes&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=Great+Vibes&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700;9..40,800&family=Oswald:wght@300;400;500&display=swap" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
     /* ===================== THEME ===================== */
@@ -84,40 +84,132 @@
       -webkit-font-smoothing: antialiased;
       transition: background 0.5s ease, color 0.5s ease;
     }
+    body::before {
+      content: '';
+      position: fixed; top: 0; left: 0; right: 0;
+      height: 0;
+      pointer-events: none; z-index: 150;
+    }
     body::after {
       content: '';
       position: fixed; inset: 0;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E");
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2020/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E");
       pointer-events: none; z-index: 9999;
       opacity: var(--grain-op); transition: opacity 0.5s ease;
+    }
+
+    /* ===================== MILLION DOLLAR SECTION ===================== */
+    .million-section {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      background: var(--bg-surface);
+      position: relative;
+      padding-top: 140px;
+      padding-bottom: 3rem;
+    }
+    /* Subtle pink glow behind the left content */
+    .million-section::before {
+      content: '';
+      position: absolute;
+      top: -20%; left: -10%;
+      width: 60%; height: 80%;
+      background: radial-gradient(ellipse at center, rgba(255,0,168,0.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .million-left {
+      padding: 4rem 4rem 7rem 5.5rem;
+      display: flex; flex-direction: column;
+      justify-content: flex-start; gap: 2.4rem;
+      position: relative; z-index: 1;
+    }
+    .million-heading {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 5.5rem;
+      font-weight: 600;
+      line-height: 0.92; letter-spacing: -0.02em;
+      text-transform: uppercase;
+      color: var(--text);
+    }
+    .million-heading .pink { color: var(--hot-pink); font-style: italic; }
+    .million-sub {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.75rem; font-weight: 500;
+      letter-spacing: 0.13em; text-transform: uppercase;
+      color: var(--text-2); line-height: 1.9;
+      max-width: 360px;
+    }
+    .million-cta {
+      display: inline-flex; align-items: center; gap: 0.6rem;
+      background: var(--hot-pink); color: #fff;
+      padding: 1rem 2.4rem; border-radius: 100px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.88rem; font-weight: 600;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      text-decoration: none; width: fit-content;
+      box-shadow: 0 6px 28px rgba(255,0,168,0.38);
+      transition: transform 0.25s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.25s ease;
+    }
+    .million-cta:hover { transform: translateY(-3px) scale(1.04); box-shadow: 0 10px 36px rgba(255,0,168,0.55); }
+    .million-cta:active { transform: scale(0.97); }
+    /* Staggered image panel */
+    .million-right {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 1fr 1fr;
+      gap: 0.7rem;
+      padding: 3rem 1rem 3rem 0.5rem;
+    }
+    .million-img {
+      overflow: hidden;
+      border-radius: 8px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+      width: 100%;
+      aspect-ratio: 3/4;
+    }
+    .million-img img {
+      width: 100%; height: 100%; object-fit: cover; display: block;
+      transition: transform 0.6s cubic-bezier(0.25,0.46,0.45,0.94);
+    }
+    .million-img:hover img { transform: scale(1.04); }
+    /* Image 2 left column spanning both rows, images 1 & 3 right column */
+    .million-img:nth-child(1) { grid-column: 2; grid-row: 1; }
+    .million-img:nth-child(2) { grid-column: 1; grid-row: 1 / 3; aspect-ratio: unset; }
+    .million-img:nth-child(3) { grid-column: 2; grid-row: 2; }
+    @media (max-width: 900px) {
+      .million-section { grid-template-columns: 1fr; }
+      .million-left { padding: 8rem 2rem 3rem; }
+      .million-right { grid-template-columns: 1fr 1fr; grid-template-rows: auto; padding: 1rem; }
+      .million-img:nth-child(2) { grid-row: auto; aspect-ratio: 3/4; }
     }
 
     /* ===================== NAV ===================== */
     .nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 200;
       display: flex; align-items: center; justify-content: space-between;
-      padding: 1.2rem 3rem;
-      transition: background 0.5s ease, border-color 0.5s ease;
-      border-bottom: 1px solid transparent;
+      padding: 0.96rem 3rem;
+      background: #FFFFFF;
+      transition: background 0.5s ease, border-color 0.5s ease, box-shadow 0.5s ease;
+      border-bottom: 1px solid rgba(0,0,0,0.06);
     }
     .nav.scrolled {
-      background: var(--nav-bg);
-      backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);
-      border-bottom-color: rgba(255,0,168,0.12);
+      box-shadow: 0 2px 24px rgba(0,0,0,0.12);
+      border-bottom-color: rgba(255,0,168,0.15);
     }
     .nav-logo img {
-      height: 44px; width: auto;
-      filter: drop-shadow(0 0 12px rgba(255,0,168,0.45));
-      transition: filter 0.3s ease;
+      height: 106px; width: auto;
+      transition: opacity 0.3s ease;
     }
-    .nav-logo img:hover { filter: drop-shadow(0 0 20px rgba(255,0,168,0.7)); }
-    html[data-theme="light"] .nav-logo img,
+    .nav-logo img:hover { opacity: 0.85; }
+    /* Light mode: nav stays pure white to match logo bg */
+    html[data-theme="light"] .nav {
+      background: #FFFFFF;
+    }
     html[data-theme="light"] .footer-logo img { mix-blend-mode: multiply; }
 
     .nav-links { display: flex; gap: 2.2rem; list-style: none; }
     .nav-links a {
-      color: var(--text-2); text-decoration: none;
-      font-size: 0.7rem; font-weight: 500;
+      color: rgba(10,10,10,0.65); text-decoration: none;
+      font-size: 0.82rem; font-weight: 500;
       letter-spacing: 0.14em; text-transform: uppercase;
       transition: color 0.2s ease;
     }
@@ -126,7 +218,7 @@
     .btn-nav {
       background: var(--hot-pink); color: white;
       padding: 0.55rem 1.4rem; border-radius: 100px;
-      font-size: 0.68rem; font-weight: 600;
+      font-size: 0.8rem; font-weight: 600;
       letter-spacing: 0.12em; text-transform: uppercase;
       text-decoration: none; display: inline-block;
       transition: transform 0.25s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.25s ease;
@@ -146,7 +238,7 @@
     .nav-hamburger:hover { background: var(--border); }
     .nav-hamburger span {
       display: block; width: 22px; height: 1.5px;
-      background: var(--text); border-radius: 2px;
+      background: #0A0A0A; border-radius: 2px;
       transition: transform 0.3s ease, opacity 0.3s ease, background 0.3s ease;
     }
     .nav-hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
@@ -186,9 +278,9 @@
 
     /* ===================== HERO ===================== */
     .hero {
-      position: relative; min-height: 100svh;
-      display: flex; align-items: center; justify-content: center;
-      overflow: hidden; padding: 7rem 1.5rem 4rem;
+      position: relative;
+      display: flex; align-items: flex-start; justify-content: center;
+      overflow: hidden; padding: 3rem 1.5rem 4rem;
     }
     .hero-bg {
       position: absolute; inset: 0;
@@ -215,7 +307,7 @@
       display: inline-flex; align-items: center; gap: 0.5rem;
       background: var(--badge-bg); border: 1px solid var(--badge-bd);
       border-radius: 100px; padding: 0.35rem 1rem;
-      font-size: 0.6rem; font-weight: 600;
+      font-size: 0.72rem; font-weight: 600;
       letter-spacing: 0.18em; text-transform: uppercase;
       color: var(--light-pink); margin-bottom: 2rem;
       animation: fadeInDown 0.9s cubic-bezier(0.34,1.56,0.64,1) forwards;
@@ -234,15 +326,15 @@
     }
     .hero-title {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 9.5rem;
+      font-size: clamp(2.8rem, 9.5vw, 9.5rem);
       font-weight: 400; line-height: 0.95; letter-spacing: -0.03em;
       animation: fadeInUp 0.9s cubic-bezier(0.34,1.56,0.64,1) 0.2s both;
     }
     .hero-title .line-italic { font-style: italic; color: var(--hot-pink); display: block; }
     .hero-title .line-normal { display: block; color: var(--text); transition: color 0.4s ease; }
     .hero-sub {
-      font-size: 0.88rem;
-      color: var(--hero-sub); letter-spacing: 0.2em; text-transform: uppercase;
+      font-size: 1rem;
+      color: var(--hero-sub); letter-spacing: 0.02em;
       font-weight: 400; margin: 1.8rem 0 2.5rem;
       animation: fadeInUp 0.9s cubic-bezier(0.34,1.56,0.64,1) 0.35s both;
       transition: color 0.4s ease;
@@ -254,7 +346,7 @@
     .btn-primary {
       background: var(--hot-pink); color: white;
       padding: 0.8rem 2.2rem; border-radius: 100px;
-      font-size: 0.75rem; font-weight: 600; letter-spacing: 0.12em;
+      font-size: 0.88rem; font-weight: 600; letter-spacing: 0.12em;
       text-transform: uppercase; text-decoration: none; display: inline-block;
       transition: transform 0.25s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.25s ease;
       box-shadow: 0 4px 24px rgba(255,0,168,0.4);
@@ -264,7 +356,7 @@
     .btn-ghost {
       background: transparent; color: var(--ghost-c);
       padding: 0.8rem 2.2rem; border-radius: 100px;
-      font-size: 0.75rem; font-weight: 500; letter-spacing: 0.12em;
+      font-size: 0.88rem; font-weight: 500; letter-spacing: 0.12em;
       text-transform: uppercase; text-decoration: none; display: inline-block;
       border: 1.5px solid var(--ghost-bd);
       transition: border-color 0.25s ease, color 0.25s ease, transform 0.25s cubic-bezier(0.34,1.56,0.64,1);
@@ -299,11 +391,36 @@
       animation: marquee 28s linear infinite; width: max-content;
     }
     .ticker-item {
-      font-size: 0.62rem; font-weight: 600; letter-spacing: 0.2em;
+      font-size: 0.75rem; font-weight: 600; letter-spacing: 0.2em;
       text-transform: uppercase; color: var(--text-3); white-space: nowrap;
       transition: color 0.4s ease;
     }
-    .ticker-star { color: var(--hot-pink); font-size: 0.7rem; flex-shrink: 0; }
+    .ticker-star { color: var(--hot-pink); font-size: 0.82rem; flex-shrink: 0; }
+
+    /* ===================== POTENTIAL TICKER ===================== */
+    .potential-ticker {
+      overflow: hidden; padding: 1.6rem 0;
+      background: var(--bg);
+      border-top: 1px solid var(--border-sub);
+      border-bottom: 1px solid var(--border-sub);
+    }
+    .potential-ticker-inner {
+      display: flex; align-items: center; gap: 2rem;
+      animation: marquee 18s linear infinite; width: max-content;
+      white-space: nowrap;
+    }
+    .potential-word {
+      font-size: 5.6rem; font-weight: 400;
+      letter-spacing: 0.04em; text-transform: uppercase;
+      color: var(--text); white-space: nowrap;
+      font-family: 'Oswald', sans-serif;
+      transition: color 0.4s ease;
+      line-height: 1;
+    }
+    .potential-star {
+      display: inline-block; flex-shrink: 0;
+      color: var(--hot-pink); font-size: 4rem; line-height: 1;
+    }
 
     /* ===================== VIDEO TESTIMONIALS ===================== */
     .videos-wrap {
@@ -325,7 +442,7 @@
     .videos-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 0.6rem;
+      gap: 1.55rem;
       padding: 0 15%;
     }
     .video-card {
@@ -352,14 +469,14 @@
     .video-stars { display: flex; gap: 2px; }
     .v-star { color: var(--hot-pink); font-size: 0.78rem; }
     .video-lbl {
-      font-size: 0.68rem; font-weight: 600; letter-spacing: 0.1em;
+      font-size: 0.8rem; font-weight: 600; letter-spacing: 0.1em;
       color: var(--text-3); text-transform: uppercase; transition: color 0.4s ease;
     }
 
     /* ===================== SECTIONS ===================== */
     .section-wrap { max-width: 1200px; margin: 0 auto; padding: 7rem 2rem; }
     .label-tag {
-      display: inline-block; font-size: 0.62rem; font-weight: 600;
+      display: inline-block; font-size: 0.75rem; font-weight: 600;
       letter-spacing: 0.22em; text-transform: uppercase;
       color: var(--hot-pink); margin-bottom: 1.2rem;
     }
@@ -371,7 +488,7 @@
     }
     .section-heading em { font-style: italic; color: var(--hot-pink); }
     .section-body {
-      color: var(--text-2); font-size: 0.92rem;
+      color: var(--text-2); font-size: 1.05rem;
       max-width: 520px; margin-top: 1rem; line-height: 1.8;
       transition: color 0.4s ease;
     }
@@ -411,11 +528,11 @@
     }
     .service-card:hover .service-icon-wrap { border-color: rgba(255,0,168,0.6); box-shadow: 0 0 16px rgba(255,0,168,0.2); }
     .service-name {
-      font-family: 'Cormorant Garamond', serif; font-size: 1.35rem;
+      font-family: 'Cormorant Garamond', serif; font-size: 1.55rem;
       font-weight: 600; color: var(--text); margin-bottom: 0.6rem;
       transition: color 0.4s ease;
     }
-    .service-desc { font-size: 0.9rem; color: var(--text-2); line-height: 1.78; transition: color 0.4s ease; }
+    .service-desc { font-size: 1rem; color: var(--text-2); line-height: 1.78; transition: color 0.4s ease; }
 
     /* ===================== STATS ===================== */
     .stats-band {
@@ -438,7 +555,7 @@
       display: block; text-shadow: var(--stat-shadow); transition: text-shadow 0.4s ease;
     }
     .stat-lbl {
-      font-size: 0.72rem; font-weight: 600; letter-spacing: 0.18em;
+      font-size: 0.82rem; font-weight: 600; letter-spacing: 0.18em;
       text-transform: uppercase; color: var(--text-3);
       margin-top: 0.5rem; display: block; transition: color 0.4s ease;
     }
@@ -466,11 +583,11 @@
     }
     .process-step:hover .step-circle { border-color: var(--hot-pink); box-shadow: 0 0 20px rgba(255,0,168,0.28); }
     .step-ttl {
-      font-family: 'Cormorant Garamond', serif; font-size: 1.2rem;
+      font-family: 'Cormorant Garamond', serif; font-size: 1.4rem;
       font-weight: 600; color: var(--text); margin-bottom: 0.45rem;
       transition: color 0.4s ease;
     }
-    .step-txt { font-size: 0.88rem; color: var(--text-2); line-height: 1.75; transition: color 0.4s ease; }
+    .step-txt { font-size: 1rem; color: var(--text-2); line-height: 1.75; transition: color 0.4s ease; }
 
     /* ===================== FAQ ===================== */
     .faq-wrap {
@@ -492,7 +609,7 @@
     .faq-btn:hover { padding-left: 0.4rem; }
     .faq-question {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 1.2rem; font-weight: 600;
+      font-size: 1.35rem; font-weight: 600;
       color: var(--text); line-height: 1.3; transition: color 0.3s ease;
     }
     .faq-item.open .faq-question { color: var(--hot-pink); }
@@ -510,7 +627,7 @@
     .faq-body { overflow: hidden; max-height: 0; transition: max-height 0.45s cubic-bezier(0.4,0,0.2,1); }
     .faq-item.open .faq-body { max-height: 300px; }
     .faq-answer {
-      font-size: 0.95rem; color: var(--text-2); line-height: 1.85;
+      font-size: 1.05rem; color: var(--text-2); line-height: 1.85;
       padding-bottom: 1.5rem; transition: color 0.4s ease;
     }
 
@@ -536,7 +653,7 @@
     .cta-heading em { font-style: italic; color: var(--hot-pink); }
     .cta-sub {
       color: var(--text-2); max-width: 500px; margin: 0 auto 2.5rem;
-      font-size: 0.92rem; line-height: 1.78;
+      font-size: 1.05rem; line-height: 1.78;
       transition: color 0.4s ease;
     }
     .cta-perks {
@@ -562,19 +679,19 @@
       justify-content: space-between; flex-wrap: wrap; gap: 1.5rem;
     }
     .footer-logo img {
-      height: 36px; width: auto;
-      filter: drop-shadow(0 0 8px rgba(255,0,168,0.3));
-      transition: filter 0.3s ease;
+      height: 132px; width: auto;
+      border-radius: 10px;
+      transition: opacity 0.3s ease;
     }
-    .footer-logo img:hover { filter: drop-shadow(0 0 16px rgba(255,0,168,0.55)); }
+    .footer-logo img:hover { opacity: 0.85; }
     .footer-nav { display: flex; gap: 1.8rem; list-style: none; flex-wrap: wrap; justify-content: center; }
     .footer-nav a {
       color: var(--text-3); text-decoration: none;
-      font-size: 0.73rem; letter-spacing: 0.07em;
+      font-size: 0.85rem; letter-spacing: 0.07em;
       transition: color 0.2s ease;
     }
     .footer-nav a:hover { color: var(--hot-pink); }
-    .footer-copy { color: var(--text-4); font-size: 0.7rem; letter-spacing: 0.04em; transition: color 0.4s ease; }
+    .footer-copy { color: var(--text-4); font-size: 0.82rem; letter-spacing: 0.04em; transition: color 0.4s ease; }
 
     /* ===================== THEME TOGGLE ===================== */
     .theme-toggle {
@@ -670,11 +787,10 @@
       .nav { padding: 0.9rem 1.2rem; }
 
       .hero { padding: 6rem 1.2rem 3.5rem; min-height: 100svh; }
-      .hero-badge { font-size: 0.56rem; padding: 0.3rem 0.9rem; margin-bottom: 1.5rem; }
-      .hero-title { font-size: 5rem; }
-      .hero-sub { font-size: 0.62rem; letter-spacing: 0.15em; margin: 1.4rem 0 2rem; }
+      .hero-badge { padding: 0.3rem 0.9rem; margin-bottom: 1.5rem; }
+      .hero-sub { letter-spacing: 0.15em; margin: 1.4rem 0 2rem; }
       .hero-ctas { gap: 0.8rem; }
-      .btn-primary, .btn-ghost { padding: 0.75rem 1.6rem; font-size: 0.7rem; }
+      .btn-primary, .btn-ghost { padding: 0.75rem 1.6rem; }
 
       .section-wrap { padding: 5rem 1.2rem; }
       .services-grid { grid-template-columns: 1fr; border-radius: 16px; }
@@ -691,11 +807,243 @@
       .theme-toggle { bottom: 1rem; right: 1rem; padding: 0.4rem 0.65rem; }
     }
 
+    /* ===================== PHOTO CAROUSEL ===================== */
+    .photo-carousel {
+      overflow: hidden;
+      padding: 4rem 0;
+      background: var(--bg);
+      border-top: 1px solid var(--border-sub);
+      transition: background 0.4s ease;
+    }
+    .photo-carousel-track {
+      display: flex;
+      gap: 1rem;
+      width: max-content;
+      animation: marquee 35s linear infinite;
+    }
+    .photo-carousel:hover .photo-carousel-track {
+      animation-play-state: paused;
+    }
+    .carousel-img {
+      width: 260px;
+      height: 340px;
+      border-radius: 12px;
+      overflow: hidden;
+      flex-shrink: 0;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.35);
+      border: 1px solid var(--border);
+      transition: transform 0.35s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.3s ease;
+    }
+    .carousel-img:hover {
+      transform: scale(1.04) translateY(-4px);
+      box-shadow: 0 16px 48px rgba(255,0,168,0.25);
+    }
+    .carousel-img img {
+      width: 100%; height: 100%; object-fit: cover; display: block;
+    }
+
     /* Small mobile (max 400px) */
     @media (max-width: 400px) {
-      .hero-title { font-size: 4rem; }
       .stats-inner { grid-template-columns: 1fr 1fr; gap: 1rem; }
       .videos-grid { padding: 0 1rem; }
+    }
+
+    /* ===================== CONTACT FORM ===================== */
+    .contact-section {
+      position: relative;
+      padding: 9rem 2rem 8rem;
+      overflow: hidden;
+      background: var(--bg-surface);
+      border-top: 1px solid var(--border-sub);
+      transition: background 0.4s ease;
+    }
+    .contact-section::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 50%;
+      transform: translateX(-50%);
+      width: 70%; height: 50%;
+      background: radial-gradient(ellipse, rgba(255,0,168,0.10) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    .contact-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .contact-heading {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 7rem;
+      font-weight: 400;
+      line-height: 1.0;
+      letter-spacing: -0.03em;
+      color: var(--text);
+      text-align: center;
+      margin-bottom: 3.5rem;
+      transition: color 0.4s ease;
+    }
+    .contact-heading em {
+      font-style: italic;
+      color: var(--hot-pink);
+    }
+    .contact-card {
+      max-width: 860px;
+      margin: 0 auto;
+      position: relative;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 3.5rem;
+      overflow: hidden;
+      transition: background 0.4s ease, border-color 0.4s ease;
+    }
+    .contact-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(255,0,168,0.5), transparent);
+    }
+    .contact-card::after {
+      content: '★';
+      position: absolute;
+      bottom: -3rem; right: -1.5rem;
+      font-size: 22rem;
+      color: var(--text-faint);
+      line-height: 1;
+      pointer-events: none;
+      font-family: serif;
+      transition: color 0.4s ease;
+    }
+    .cf-grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2.2rem 2.5rem;
+      margin-bottom: 2.2rem;
+    }
+    .cf-field {
+      position: relative;
+    }
+    .cf-field label {
+      display: block;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--text-3);
+      margin-bottom: 0.75rem;
+      transition: color 0.4s ease;
+    }
+    .cf-field input,
+    .cf-field textarea {
+      width: 100%;
+      background: transparent;
+      border: none;
+      border-bottom: 1px solid var(--border);
+      padding: 0.55rem 0;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.95rem;
+      color: var(--text);
+      outline: none;
+      transition: border-color 0.25s ease, color 0.4s ease;
+    }
+    .cf-field input::placeholder,
+    .cf-field textarea::placeholder {
+      color: var(--text-4);
+      transition: color 0.4s ease;
+    }
+    .cf-field input:focus,
+    .cf-field textarea:focus {
+      border-bottom-color: var(--hot-pink);
+    }
+    .cf-field textarea {
+      resize: none;
+      height: 110px;
+      line-height: 1.7;
+    }
+    .cf-field-full {
+      margin-bottom: 2.2rem;
+    }
+    /* Phone row with country prefix */
+    .phone-row {
+      display: flex;
+      align-items: flex-end;
+      border-bottom: 1px solid var(--border);
+      transition: border-color 0.25s ease;
+    }
+    .phone-row:focus-within {
+      border-bottom-color: var(--hot-pink);
+    }
+    .phone-prefix-btn {
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      padding: 0.55rem 0.5rem 0.55rem 0;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.88rem;
+      color: var(--text-2);
+      flex-shrink: 0;
+      outline: none;
+      white-space: nowrap;
+      transition: color 0.2s ease;
+    }
+    .phone-prefix-btn:hover { color: var(--text); }
+    .phone-prefix-btn svg { width: 10px; height: 10px; flex-shrink: 0; opacity: 0.5; }
+    .phone-row input {
+      border-bottom: none !important;
+      padding-left: 0.35rem;
+      flex: 1;
+      min-width: 0;
+    }
+    .btn-submit {
+      width: 100%;
+      background: var(--hot-pink);
+      color: white;
+      border: none;
+      padding: 1rem 2rem;
+      border-radius: 100px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.88rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      cursor: pointer;
+      box-shadow: 0 4px 24px rgba(255,0,168,0.4);
+      transition: transform 0.25s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.25s ease;
+    }
+    .btn-submit:hover {
+      transform: translateY(-3px) scale(1.02);
+      box-shadow: 0 10px 36px rgba(255,0,168,0.58);
+    }
+    .btn-submit:active { transform: scale(0.98); }
+    .btn-submit:focus-visible {
+      outline: 2px solid var(--hot-pink);
+      outline-offset: 3px;
+    }
+
+    /* Light mode overrides */
+    html[data-theme="light"] .contact-section { background: #FDF5F9; }
+    html[data-theme="light"] .contact-card {
+      background: #FFFFFF;
+      border-color: rgba(255,0,168,0.12);
+    }
+    html[data-theme="light"] .cf-field input,
+    html[data-theme="light"] .cf-field textarea,
+    html[data-theme="light"] .phone-row input {
+      color: #1A1A1A;
+      border-bottom-color: rgba(0,0,0,0.12);
+    }
+    html[data-theme="light"] .phone-row {
+      border-bottom-color: rgba(0,0,0,0.12);
+    }
+    html[data-theme="light"] .cf-field input::placeholder,
+    html[data-theme="light"] .cf-field textarea::placeholder { color: rgba(0,0,0,0.25); }
+
+    @media (max-width: 640px) {
+      .contact-section { padding: 6rem 1.2rem 5rem; }
+      .contact-card { padding: 2rem 1.5rem; border-radius: 18px; }
+      .cf-grid-2 { grid-template-columns: 1fr; gap: 2rem; }
     }
   </style>
 </head>
@@ -704,7 +1052,7 @@
 <!-- ============ NAVIGATION ============ -->
 <nav class="nav" id="mainNav">
   <a href="#" class="nav-logo">
-    <img src="brand_assets/TopStar-MGMT-PDF-3-SQUARE.png" alt="TopStar MGMT">
+    <img src="brand_assets/NEW%20LOGO.jpeg" alt="TopStar MGMT">
   </a>
   <ul class="nav-links">
     <li><a href="#services">Services</a></li>
@@ -713,7 +1061,7 @@
     <li><a href="#faq">FAQ</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
-  <a href="https://www.topstarmgmt.com/apply-now/" target="_blank" class="btn-nav">Apply Now</a>
+  <a href="#contact" class="btn-nav">Apply Now</a>
   <button class="nav-hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
     <span></span><span></span><span></span>
   </button>
@@ -726,61 +1074,72 @@
   <a href="#testimonials" class="mobile-nav-link">Creators</a>
   <a href="#faq" class="mobile-nav-link">FAQ</a>
   <a href="#contact" class="mobile-nav-link">Contact</a>
-  <a href="https://www.topstarmgmt.com/apply-now/" target="_blank" class="btn-primary mobile-apply">Apply Now</a>
+  <a href="#contact" class="btn-primary mobile-apply">Apply Now</a>
 </div>
+
+<!-- ============ MILLION DOLLAR SECTION ============ -->
+<section class="million-section">
+  <div class="million-left">
+    <h2 class="million-heading">
+      <span style="white-space:nowrap;">Become a</span><br>
+      Million<br>
+      Dollar<br>
+      Creator<br>
+      with<br>
+      <span class="pink" style="text-transform:none;">TopStar MGMT</span>
+    </h2>
+    <p class="million-sub">We've empowered more creators to achieve financial success than any other company. Are you next?</p>
+    <a href="#contact" class="million-cta">Start your journey</a>
+  </div>
+  <div class="million-right">
+    <div class="million-img">
+      <img src="media/2026-03-18%2014.10.07.jpg" alt="Creator">
+    </div>
+    <div class="million-img">
+      <img src="media/IMG_4935.JPG" alt="Creator">
+    </div>
+    <div class="million-img">
+      <img src="media/IMG_6104.jpg" alt="Creator">
+    </div>
+  </div>
+</section>
 
 <!-- ============ HERO ============ -->
 <section class="hero">
   <div class="hero-bg"></div>
   <div class="hero-grid"></div>
   <div class="hero-content">
-    <div class="hero-badge">
-      <span class="badge-dot"></span>
-      Elite OnlyFans Creator Management
-    </div>
-    <span class="hero-eyebrow">Welcome to</span>
     <h1 class="hero-title">
-      <span class="line-normal">Your Star</span>
-      <span class="line-italic">Rises Here</span>
+      <span class="line-normal" style="white-space:nowrap;">Your Star <span class="line-italic" style="display:inline;">Rises Here</span></span>
     </h1>
-    <p class="hero-sub">Turn your passion into life-changing income — zero upfront costs, we only earn when you earn</p>
+    <p class="hero-sub">We are a full-service agency, specializing in everything from front-end production for mainstream social media to comprehensive paywall management solutions. Let us elevate your content and maximize your revenue!</p>
     <div class="hero-ctas">
-      <a href="https://www.topstarmgmt.com/apply-now/" target="_blank" class="btn-primary">Apply Now</a>
-      <a href="#services" class="btn-ghost">Explore Services</a>
+      <a href="#contact" class="btn-primary">Apply Now</a>
     </div>
-  </div>
-  <div class="hero-scroll-hint">
-    <div class="scroll-bar"></div>
-    <span class="scroll-label">Scroll</span>
   </div>
 </section>
 
-<!-- ============ TICKER ============ -->
-<div class="ticker">
-  <div class="ticker-inner">
-    <span class="ticker-item">Account Management</span><span class="ticker-star">★</span>
-    <span class="ticker-item">OnlyFans Promotions</span><span class="ticker-star">★</span>
-    <span class="ticker-item">Social Media Growth</span><span class="ticker-star">★</span>
-    <span class="ticker-item">Content Strategy</span><span class="ticker-star">★</span>
-    <span class="ticker-item">Message Specialists</span><span class="ticker-star">★</span>
-    <span class="ticker-item">Brand Development</span><span class="ticker-star">★</span>
-    <span class="ticker-item">Commission-Based — No Upfront Costs</span><span class="ticker-star">★</span>
-    <span class="ticker-item">Account Management</span><span class="ticker-star">★</span>
-    <span class="ticker-item">OnlyFans Promotions</span><span class="ticker-star">★</span>
-    <span class="ticker-item">Social Media Growth</span><span class="ticker-star">★</span>
-    <span class="ticker-item">Content Strategy</span><span class="ticker-star">★</span>
-    <span class="ticker-item">Message Specialists</span><span class="ticker-star">★</span>
-    <span class="ticker-item">Brand Development</span><span class="ticker-star">★</span>
-    <span class="ticker-item">Commission-Based — No Upfront Costs</span><span class="ticker-star">★</span>
+<!-- ============ POTENTIAL TICKER ============ -->
+<div class="potential-ticker" aria-hidden="true">
+  <div class="potential-ticker-inner">
+    <span class="potential-word">Unlock</span><span class="potential-star">★</span>
+    <span class="potential-word">Your</span><span class="potential-star">★</span>
+    <span class="potential-word">Potential</span><span class="potential-star">★</span>
+    <span class="potential-word">Unlock</span><span class="potential-star">★</span>
+    <span class="potential-word">Your</span><span class="potential-star">★</span>
+    <span class="potential-word">Potential</span><span class="potential-star">★</span>
+    <span class="potential-word">Unlock</span><span class="potential-star">★</span>
+    <span class="potential-word">Your</span><span class="potential-star">★</span>
+    <span class="potential-word">Potential</span><span class="potential-star">★</span>
+    <span class="potential-word">Unlock</span><span class="potential-star">★</span>
+    <span class="potential-word">Your</span><span class="potential-star">★</span>
+    <span class="potential-word">Potential</span><span class="potential-star">★</span>
   </div>
 </div>
 
-<!-- ============ VIDEO TESTIMONIALS (right after hero) ============ -->
 <div id="testimonials" class="videos-wrap">
   <div class="videos-header reveal">
-    <span class="label-tag">Creator Stories</span>
     <h2 class="section-heading">Hear it from our <em>creators</em></h2>
-    <p class="section-body" style="margin: 1rem auto 0; text-align:center;">Real results from real people. Watch what our creators say about working with TopStar MGMT.</p>
   </div>
   <div class="videos-grid">
     <div class="video-card reveal">
@@ -791,10 +1150,6 @@
           title="Creator Testimonial 1" loading="lazy">
         </iframe>
       </div>
-      <div class="video-footer">
-        <div class="video-stars"><span class="v-star">★</span><span class="v-star">★</span><span class="v-star">★</span><span class="v-star">★</span><span class="v-star">★</span></div>
-        <span class="video-lbl">Creator Review</span>
-      </div>
     </div>
     <div class="video-card reveal reveal-delay-1">
       <div class="video-ratio">
@@ -803,10 +1158,6 @@
           allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media"
           title="Creator Testimonial 2" loading="lazy">
         </iframe>
-      </div>
-      <div class="video-footer">
-        <div class="video-stars"><span class="v-star">★</span><span class="v-star">★</span><span class="v-star">★</span><span class="v-star">★</span><span class="v-star">★</span></div>
-        <span class="video-lbl">Creator Review</span>
       </div>
     </div>
     <div class="video-card reveal reveal-delay-2">
@@ -817,10 +1168,6 @@
           title="Creator Testimonial 3" loading="lazy">
         </iframe>
       </div>
-      <div class="video-footer">
-        <div class="video-stars"><span class="v-star">★</span><span class="v-star">★</span><span class="v-star">★</span><span class="v-star">★</span><span class="v-star">★</span></div>
-        <span class="video-lbl">Creator Review</span>
-      </div>
     </div>
   </div>
 </div>
@@ -829,7 +1176,6 @@
 <section id="services">
   <div class="section-wrap">
     <div class="reveal">
-      <span class="label-tag">What We Do</span>
       <h2 class="section-heading">Everything you need<br>to <em>reach the top</em></h2>
       <p class="section-body">From account management to revenue optimisation — our expert team works 24/7 so you can focus on creating content and building the life you want.</p>
     </div>
@@ -924,7 +1270,6 @@
 <section id="process">
   <div class="section-wrap">
     <div class="reveal" style="text-align:center;">
-      <span class="label-tag">The Process</span>
       <h2 class="section-heading">Your journey to the<br><em>top</em> starts here</h2>
     </div>
     <div class="process-grid reveal reveal-delay-1">
@@ -957,7 +1302,6 @@
 <section id="faq" class="faq-wrap">
   <div class="faq-inner">
     <div class="reveal" style="text-align:center;">
-      <span class="label-tag">Got Questions?</span>
       <h2 class="section-heading">Your TopStar <em>FAQs</em> Uncovered</h2>
     </div>
     <div class="faq-list reveal reveal-delay-1">
@@ -1007,35 +1351,71 @@
   </div>
 </section>
 
-<!-- ============ APPLY CTA ============ -->
-<section id="apply" class="cta-wrap">
-  <div class="cta-inner reveal">
-    <span class="label-tag">Ready to begin?</span>
-    <h2 class="cta-heading">Unlock your<br><em>potential</em></h2>
-    <p class="cta-sub">We've helped hundreds of creators achieve financial freedom. Commission-based, zero upfront costs, flexible contracts. Your success is our only business.</p>
-    <a href="https://www.topstarmgmt.com/apply-now/" target="_blank" class="btn-primary" style="padding:0.9rem 2.8rem;">Tell Us About Yourself</a>
-    <div class="cta-perks">
-      <span class="cta-perk"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>No upfront costs</span>
-      <span class="cta-perk"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>You own your content</span>
-      <span class="cta-perk"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>Flexible contracts</span>
-      <span class="cta-perk"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>24/7 support</span>
-      <span class="cta-perk"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>Data-driven strategy</span>
+
+<!-- ============ CONTACT FORM ============ -->
+<section id="contact" class="contact-section">
+  <div class="contact-inner">
+    <h2 class="contact-heading reveal">
+      Are you ready to work with<br><em>TopStar MGMT?</em>
+    </h2>
+    <div class="contact-card reveal reveal-delay-1">
+      <form id="contactForm" onsubmit="handleFormSubmit(event)">
+        <div class="cf-grid-2">
+          <div class="cf-field">
+            <label for="cf-fname">First Name</label>
+            <input type="text" id="cf-fname" name="first_name" placeholder="Your first name" autocomplete="given-name" required>
+          </div>
+          <div class="cf-field">
+            <label for="cf-lname">Last Name</label>
+            <input type="text" id="cf-lname" name="last_name" placeholder="Your last name" autocomplete="family-name" required>
+          </div>
+          <div class="cf-field">
+            <label for="cf-email">Email Address</label>
+            <input type="email" id="cf-email" name="email" placeholder="you@example.com" autocomplete="email" required>
+          </div>
+          <div class="cf-field">
+            <label for="cf-phone">Phone Number</label>
+            <div class="phone-row">
+              <button type="button" class="phone-prefix-btn" aria-label="Country code">
+                🇬🇧 +44
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
+              </button>
+              <input type="tel" id="cf-phone" name="phone" placeholder="Phone number" autocomplete="tel">
+            </div>
+          </div>
+        </div>
+        <div class="cf-grid-2">
+          <div class="cf-field">
+            <label for="cf-instagram">Instagram @</label>
+            <input type="text" id="cf-instagram" name="instagram" placeholder="@yourhandle" autocomplete="off">
+          </div>
+          <div class="cf-field">
+            <label for="cf-telegram">Telegram @</label>
+            <input type="text" id="cf-telegram" name="telegram" placeholder="@yourtelegram" autocomplete="off">
+          </div>
+        </div>
+        <div class="cf-field cf-field-full">
+          <label for="cf-msg">Drop us a message</label>
+          <textarea id="cf-msg" name="message" placeholder="Tell us about yourself — your goals, current following, and what you're looking for..."></textarea>
+        </div>
+        <button type="submit" class="btn-submit">Start Your Journey</button>
+      </form>
     </div>
   </div>
 </section>
 
 <!-- ============ FOOTER ============ -->
-<footer id="contact">
+<footer>
   <div class="footer-row">
     <a href="#" class="footer-logo">
-      <img src="brand_assets/TopStar-MGMT-PDF-3-SQUARE.png" alt="TopStar MGMT">
+      <img src="brand_assets/NEW%20LOGO.jpeg" alt="TopStar MGMT">
     </a>
     <ul class="footer-nav">
       <li><a href="#services">Services</a></li>
       <li><a href="#process">Process</a></li>
       <li><a href="#testimonials">Creators</a></li>
       <li><a href="#faq">FAQ</a></li>
-      <li><a href="https://www.topstarmgmt.com/apply-now/" target="_blank">Apply Now</a></li>
+      <li><a href="#contact">Apply Now</a></li>
     </ul>
     <p class="footer-copy">© 2026 TopStar MGMT. All rights reserved.</p>
   </div>
@@ -1148,6 +1528,24 @@
   const handleToggle = () => setTheme(html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
   themeToggle.addEventListener('click', handleToggle);
   themeToggle.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); handleToggle(); } });
+
+  // ---- CONTACT FORM ----
+  function handleFormSubmit(e) {
+    e.preventDefault();
+    const btn = e.target.querySelector('.btn-submit');
+    btn.textContent = 'Sending…';
+    btn.disabled = true;
+    setTimeout(() => {
+      btn.textContent = '✓ Message Sent!';
+      btn.style.background = '#1a9e5c';
+      e.target.reset();
+      setTimeout(() => {
+        btn.textContent = 'Start Your Journey';
+        btn.style.background = '';
+        btn.disabled = false;
+      }, 3500);
+    }, 1200);
+  }
 </script>
 </body>
 </html>
