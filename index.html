@@ -985,6 +985,7 @@
     .phone-row:focus-within {
       border-bottom-color: var(--hot-pink);
     }
+    .phone-prefix-wrap { position: relative; flex-shrink: 0; }
     .phone-prefix-btn {
       background: transparent;
       border: none;
@@ -1003,6 +1004,33 @@
     }
     .phone-prefix-btn:hover { color: var(--text); }
     .phone-prefix-btn svg { width: 10px; height: 10px; flex-shrink: 0; opacity: 0.5; }
+    .country-dropdown {
+      display: none;
+      position: absolute;
+      top: calc(100% + 4px);
+      left: 0;
+      z-index: 999;
+      background: #fff;
+      border: 1px solid rgba(0,0,0,0.1);
+      border-radius: 10px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.12);
+      min-width: 200px;
+      max-height: 240px;
+      overflow-y: auto;
+    }
+    .country-dropdown.open { display: block; }
+    .country-option {
+      padding: 0.55rem 1rem;
+      cursor: pointer;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.85rem;
+      color: #1a1a1a;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: background 0.15s ease;
+    }
+    .country-option:hover { background: rgba(255,0,168,0.06); }
     .phone-row input {
       border-bottom: none !important;
       padding-left: 0.35rem;
@@ -1391,10 +1419,43 @@
           <div class="cf-field">
             <label for="cf-phone">Phone Number</label>
             <div class="phone-row">
-              <button type="button" class="phone-prefix-btn" aria-label="Country code">
-                🇬🇧 +44
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
-              </button>
+              <div class="phone-prefix-wrap">
+                <button type="button" class="phone-prefix-btn" id="phonePrefixBtn" aria-label="Country code">
+                  <span id="phonePrefixLabel">🇬🇧 +44</span>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
+                </button>
+                <input type="hidden" name="country_code" id="phoneCountryCode" value="+44">
+                <div class="country-dropdown" id="countryDropdown">
+                  <div class="country-option" data-code="+44" data-flag="🇬🇧">🇬🇧 United Kingdom +44</div>
+                  <div class="country-option" data-code="+1" data-flag="🇺🇸">🇺🇸 United States +1</div>
+                  <div class="country-option" data-code="+1" data-flag="🇨🇦">🇨🇦 Canada +1</div>
+                  <div class="country-option" data-code="+61" data-flag="🇦🇺">🇦🇺 Australia +61</div>
+                  <div class="country-option" data-code="+64" data-flag="🇳🇿">🇳🇿 New Zealand +64</div>
+                  <div class="country-option" data-code="+353" data-flag="🇮🇪">🇮🇪 Ireland +353</div>
+                  <div class="country-option" data-code="+33" data-flag="🇫🇷">🇫🇷 France +33</div>
+                  <div class="country-option" data-code="+49" data-flag="🇩🇪">🇩🇪 Germany +49</div>
+                  <div class="country-option" data-code="+31" data-flag="🇳🇱">🇳🇱 Netherlands +31</div>
+                  <div class="country-option" data-code="+34" data-flag="🇪🇸">🇪🇸 Spain +34</div>
+                  <div class="country-option" data-code="+39" data-flag="🇮🇹">🇮🇹 Italy +39</div>
+                  <div class="country-option" data-code="+46" data-flag="🇸🇪">🇸🇪 Sweden +46</div>
+                  <div class="country-option" data-code="+47" data-flag="🇳🇴">🇳🇴 Norway +47</div>
+                  <div class="country-option" data-code="+45" data-flag="🇩🇰">🇩🇰 Denmark +45</div>
+                  <div class="country-option" data-code="+358" data-flag="🇫🇮">🇫🇮 Finland +358</div>
+                  <div class="country-option" data-code="+48" data-flag="🇵🇱">🇵🇱 Poland +48</div>
+                  <div class="country-option" data-code="+7" data-flag="🇷🇺">🇷🇺 Russia +7</div>
+                  <div class="country-option" data-code="+380" data-flag="🇺🇦">🇺🇦 Ukraine +380</div>
+                  <div class="country-option" data-code="+55" data-flag="🇧🇷">🇧🇷 Brazil +55</div>
+                  <div class="country-option" data-code="+52" data-flag="🇲🇽">🇲🇽 Mexico +52</div>
+                  <div class="country-option" data-code="+57" data-flag="🇨🇴">🇨🇴 Colombia +57</div>
+                  <div class="country-option" data-code="+54" data-flag="🇦🇷">🇦🇷 Argentina +54</div>
+                  <div class="country-option" data-code="+27" data-flag="🇿🇦">🇿🇦 South Africa +27</div>
+                  <div class="country-option" data-code="+971" data-flag="🇦🇪">🇦🇪 UAE +971</div>
+                  <div class="country-option" data-code="+91" data-flag="🇮🇳">🇮🇳 India +91</div>
+                  <div class="country-option" data-code="+81" data-flag="🇯🇵">🇯🇵 Japan +81</div>
+                  <div class="country-option" data-code="+82" data-flag="🇰🇷">🇰🇷 South Korea +82</div>
+                  <div class="country-option" data-code="+63" data-flag="🇵🇭">🇵🇭 Philippines +63</div>
+                </div>
+              </div>
               <input type="tel" id="cf-phone" name="phone" placeholder="Phone number" autocomplete="tel">
             </div>
           </div>
@@ -1504,6 +1565,29 @@
 
   // ---- THEME TOGGLE ----
   const html        = document.documentElement;
+
+  // ---- COUNTRY CODE DROPDOWN ----
+  const phonePrefixBtn   = document.getElementById('phonePrefixBtn');
+  const countryDropdown  = document.getElementById('countryDropdown');
+  const phonePrefixLabel = document.getElementById('phonePrefixLabel');
+  const phoneCountryCode = document.getElementById('phoneCountryCode');
+
+  phonePrefixBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    countryDropdown.classList.toggle('open');
+  });
+
+  document.querySelectorAll('.country-option').forEach(opt => {
+    opt.addEventListener('click', () => {
+      const code = opt.dataset.code;
+      const flag = opt.dataset.flag;
+      phonePrefixLabel.textContent = flag + ' ' + code;
+      phoneCountryCode.value = code;
+      countryDropdown.classList.remove('open');
+    });
+  });
+
+  document.addEventListener('click', () => countryDropdown.classList.remove('open'));
 
   // ---- CONTACT FORM ----
   function handleFormSubmit(e) {
