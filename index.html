@@ -1401,8 +1401,6 @@
     </h2>
     <div class="contact-card reveal reveal-delay-1">
       <form id="contactForm" onsubmit="handleFormSubmit(event)">
-        <input type="hidden" name="access_key" value="7145375e-b7bc-4b26-95a0-151286433c14">
-        <input type="hidden" name="subject" value="New Creator Application — TopStar MGMT">
         <div class="cf-grid-2">
           <div class="cf-field">
             <label for="cf-fname">First Name</label>
@@ -1764,7 +1762,7 @@
 
     const data = new FormData(form);
 
-    fetch('https://api.web3forms.com/submit', {
+    fetch('https://formspree.io/f/xeerbowr', {
       method: 'POST',
       body: data
     })
