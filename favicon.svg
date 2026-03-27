@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <!-- 5-pointed star: outer r=14, inner r=5.5, centered at 16,16 -->
+  <!-- Faceted pink star matching TopStar MGMT logo -->
+
+  <!-- Base star fill -->
+  <polygon points="16,2 19.53,11.15 29.31,11.67 21.71,17.85 24.23,27.33 16,22 7.77,27.33 10.29,17.85 2.69,11.67 12.47,11.15" fill="#FF00A8"/>
+
+  <!-- Darker facet — top-right face (mimics logo shadow) -->
+  <polygon points="16,2 19.53,11.15 16,14" fill="#C4006A" opacity="0.55"/>
+  <!-- Lower-right face -->
+  <polygon points="29.31,11.67 21.71,17.85 16,14" fill="#C4006A" opacity="0.45"/>
+  <!-- Bottom-right face -->
+  <polygon points="24.23,27.33 16,22 16,14" fill="#C4006A" opacity="0.3"/>
+</svg>
